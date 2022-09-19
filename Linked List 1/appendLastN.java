@@ -30,47 +30,45 @@
 
 public class Solution {
     
-    public static int length(LinkedListNode<Integer> head){
-	   
+    public static LinkedListNode<Integer> appendLastNToFirst(LinkedListNode<Integer> head, int n) {
+		//Your code goes here
+		
+        if(head == null)
+            return head;
+        
+        LinkedListNode<Integer> tail = head, temp = head, temp1 = null;
+        
         int count=0;
         
-        while(head != null) {
+		while(tail.next != null) {
             
             count++;
             
-            head = head.next;
-        }
+            tail = tail.next;
+        }    
         
-        return count;
-	}
-
-	public static LinkedListNode<Integer> appendLastNToFirst(LinkedListNode<Integer> head, int n) {
-		//Your code goes here
-
-        if(n > length(head))
+        count++;
+        
+        if(n > count || head == null)
             return null;
         
         if(n == 0)
             return head;
         
-        LinkedListNode<Integer> temp = head;
-		LinkedListNode<Integer> tail = head;
-        
-        for(int i=0; i<length(head)-1; i++) {
+		
+        for(int i=0; i<count-n-1; i++) {
             
-            if(i < length(head)-n-1)
-	            temp = temp.next;
-            
-            tail = tail.next;
+            temp = temp.next;
         }
         
-        LinkedListNode<Integer> temp1 = temp.next;
+		temp1 = temp.next;
         
         temp.next = null;
         tail.next = head;
         head = temp1;
         
-        return head;        
+        
+		return head;        
 	}
 
 }
